@@ -56,7 +56,7 @@ void reset_handler()
     /* Copia a secao .data para a RAM */
     uint32_t size = (uint32_t)&_edata - (uint32_t)&_sdata;
     uint8_t *pDst = (uint8_t*)&_sdata; /* SRAM */
-    uint8_t *pSrc = (uint8_t*)&_etext; /* FLASH */
+    uint8_t *pSrc = (uint8_t*)&_la_data; /* FLASH */
     for(i = 0; i < size; i++)
     {
         *pDst++ = *pSrc++;
