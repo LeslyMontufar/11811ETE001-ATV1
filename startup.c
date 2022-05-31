@@ -57,10 +57,12 @@ void reset_handler()
     uint32_t size = (uint32_t)&_edata - (uint32_t)&_sdata;
     uint8_t *pDst = (uint8_t*)&_sdata; /* SRAM */
     uint8_t *pSrc = (uint8_t*)&_la_data; /* FLASH */
+
     for(i = 0; i < size; i++)
     {
         *pDst++ = *pSrc++;
     }
+
     /* Preenche a secao .bss com zero */
     size = (uint32_t)&_ebss - (uint32_t)&_sbss;
     pDst = (uint8_t*)&_sbss;
@@ -68,6 +70,7 @@ void reset_handler()
     {
         *pDst++ = 0;
     }
+    
     /* Chama a funcao main() */
     main();
 }
