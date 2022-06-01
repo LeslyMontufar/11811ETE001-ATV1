@@ -3,20 +3,20 @@
 #define LED_DELAY 5000
 
 /* AHB1 Base Addresses ******************************************************/
-#define STM32_RCC_BASE 0x40023800 /* 0x40023800-0x40023bff: Reset and Clock control RCC */
+#define STM32_RCC_BASE 0x40023800       /* 0x40023800-0x40023bff: Reset and Clock control RCC */
 
 /* AHB2 Base Addresses ******************************************************/
-#define STM32_GPIOC_BASE 0x48000800U /* 0x48000800-0x48000bff: GPIO
+#define STM32_GPIOC_BASE 0x48000800U    /* 0x48000800-0x48000bff: GPIO
 Port C */
 
 /* Register Offsets *********************************************************/
 #define STM32_RCC_AHB1ENR_OFFSET 0x0030 /* AHB1 Peripheral Clock enable
 register */
-#define STM32_GPIO_MODER_OFFSET 0x0000 /* GPIO port mode register */
+#define STM32_GPIO_MODER_OFFSET 0x0000  /* GPIO port mode register */
 #define STM32_GPIO_OTYPER_OFFSET 0x0004 /* GPIO port output type register */
-#define STM32_GPIO_PUPDR_OFFSET 0x000c /* GPIO port pull-up/pull-down
+#define STM32_GPIO_PUPDR_OFFSET 0x000c  /* GPIO port pull-up/pull-down
 register */
-#define STM32_GPIO_BSRR_OFFSET 0x0018 /* GPIO port bit set/reset register */
+#define STM32_GPIO_BSRR_OFFSET 0x0018   /* GPIO port bit set/reset register */
 
 /* Register Addresses *******************************************************/
 #define STM32_RCC_AHB1ENR (STM32_RCC_BASE+STM32_RCC_AHB1ENR_OFFSET)
@@ -27,24 +27,26 @@ register */
 
 
 /* AHB1 Peripheral Clock enable register */
-#define RCC_AHB1ENR_GPIOCEN (1 << 2) /* Bit 2: IO port C clock
-enable */
+#define RCC_AHB1ENR_GPIOCEN (1 << 2)    /* Bit 2: IO port C clock enable */
+
 /* GPIO port mode register */
-#define GPIO_MODER_INPUT (0) /* Input */
-#define GPIO_MODER_OUTPUT (1) /* General purpose output mode */
-#define GPIO_MODER_ALT (2) /* Alternate mode */
-#define GPIO_MODER_ANALOG (3) /* Analog mode */
+#define GPIO_MODER_INPUT (0)            /* Input */
+#define GPIO_MODER_OUTPUT (1)           /* General purpose output mode */
+#define GPIO_MODER_ALT (2)              /* Alternate mode */
+#define GPIO_MODER_ANALOG (3)           /* Analog mode */
 #define GPIO_MODER13_SHIFT (26)
 #define GPIO_MODER13_MASK (3 << GPIO_MODER13_SHIFT)
+
 /* GPIO port output type register */
-#define GPIO_OTYPER_PP (0) /* 0=Output push-pull */
-#define GPIO_OTYPER_OD (1) /* 1=Output open-drain */
+#define GPIO_OTYPER_PP (0)              /* 0=Output push-pull */
+#define GPIO_OTYPER_OD (1)              /* 1=Output open-drain */
 #define GPIO_OT13_SHIFT (13)
 #define GPIO_OT13_MASK (1 << GPIO_OT13_SHIFT)
+
 /* GPIO port pull-up/pull-down register */
-#define GPIO_PUPDR_NONE (0) /* No pull-up, pull-down */
-#define GPIO_PUPDR_PULLUP (1) /* Pull-up */
-#define GPIO_PUPDR_PULLDOWN (2) /* Pull-down */
+#define GPIO_PUPDR_NONE (0)             /* No pull-up, pull-down */
+#define GPIO_PUPDR_PULLUP (1)           /* Pull-up */
+#define GPIO_PUPDR_PULLDOWN (2)         /* Pull-down */
 #define GPIO_PUPDR13_SHIFT (26)
 #define GPIO_PUPDR13_MASK (3 << GPIO_PUPDR13_SHIFT)
 
@@ -90,7 +92,6 @@ int main(int argc, char *argv[])
         *pGPIOC_BSRR = GPIO_BSRR_RST(13);
         for(uint32_t i = 0; i < LED_DELAY; i++);
     }
-    /* Nao deveria chegar aqui */
 
     return EXIT_SUCCESS;
 }

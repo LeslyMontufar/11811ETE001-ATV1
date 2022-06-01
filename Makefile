@@ -4,7 +4,7 @@ CC = arm-none-eabi-gcc
 LD = arm-none-eabi-gcc
 CP = arm-none-eabi-objcopy
 CFLAGS = -mcpu=cortex-m4 -mthumb
-LFLAGS = -nostdlib -T stm32f411-rom.ld
+LFLAGS = -nostdlib -T stm32f103-rom.ld
 
 OBJS = startup.o \
 		main.o
