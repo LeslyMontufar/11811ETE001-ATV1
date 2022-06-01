@@ -1,10 +1,22 @@
-CC = arm-none-eabi-gcc
-CFLAGS = -c -mcpu=cortex-m3 -mthumb -Wall -O0 # Cortex M3 para o STM32F103
+PROG = blinky
 
-all: startup.o main.o
+CC = arm-none-eabi-gcc
+LD = arm-none-eabi-gcc
+CP = arm-none-eabi-objcopy
+CFLAGS = -mcpu=cortex-m4 -mthumb
+LFLAGS = -nostdlib -T stm32f411-rom.ld
+
+OBJS = startup.o \
+		main.o
+
+all: $(PROG).elf
+
+$(PROG).elf: $(OBJS)
+	$(LD) $(LFLAGS) $^ -o $@
+	$(CP) $(PROG).elf -O binary $(PROG).bin
 
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	rm -f *.o
+	rm -f $(OBJS) $(PROG).elf
