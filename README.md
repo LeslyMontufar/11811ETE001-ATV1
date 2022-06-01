@@ -32,7 +32,7 @@ O Makefile é utilizado para automatizar o processo de compilação e, assim, ev
 
 ![7](https://github.com/LeslyMontufar/11811ETE001-ATV1/blob/main/img/7.jpg)
 
-## linker script
-
+## main.c e linker script
+A diferença no linker script foi mudar "M4" para "M3", já que minha placa usa o Cortex M3. O main.c contém o código de piscar o LED e está na pasta src/. Assim, foi gerado os arquivos blinky.bin e blinky.elf para ser interpretado pelo STM32.
 
 
