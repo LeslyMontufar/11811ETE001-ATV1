@@ -3,7 +3,7 @@ PROG = blinky
 CC = arm-none-eabi-gcc
 LD = arm-none-eabi-gcc
 CP = arm-none-eabi-objcopy
-CFLAGS = -mcpu=cortex-m4 -mthumb
+CFLAGS = -mcpu=cortex-m3 -mthumb
 LFLAGS = -nostdlib -T stm32f103-rom.ld
 
 OBJS = startup.o \
