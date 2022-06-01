@@ -28,9 +28,11 @@ O driver USB do STLink foi baixado, pois mostrado abaixo, o STLink foi reconheci
 ![6](https://github.com/LeslyMontufar/11811ETE001-ATV1/blob/main/img/6.jpeg)
 
 ## Makefile e startup.c
+O Makefile é utilizado para automatizar o processo de compilação e, assim, evitar repertir comandos extensos inúmeras vezes. Já o startup.c, também no diretório src/, é um arquivo de inicialização cujo um de suas papeis é declarar e inicializar a Tabela de Vetores de Interrupção, que foi adaptado para o uC STM32F103, como visto na imagem abaixo.
 
+![7](https://github.com/LeslyMontufar/11811ETE001-ATV1/blob/main/img/7.jpg)
 
 ## linker script
 
-![7](https://github.com/LeslyMontufar/11811ETE001-ATV1/blob/main/img/7.jpeg)
+
 
