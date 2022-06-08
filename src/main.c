@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
     *pRCC_APB2ENR = reg;
     
     /* Configura PC13 como saida General purpose output push-pull */
-    // reg = (PINO_LED < 8)? *pGPIOC_CRL : *pGPIOC_CRH;
+    reg = ((PINO_LED < 8)? *pGPIOC_CRL : *pGPIOC_CRH);
 
     reg = *pGPIOC_CRH;
     reg &= ~GPIO_CNF_MASK(PINO_LED);
@@ -89,10 +89,8 @@ int main(int argc, char *argv[])
     reg &= ~GPIO_MODE_MASK(PINO_LED);
     reg |= (GPIO_MODE_OUTPUT_10MHZ << GPIO_MODE_SHIFT(PINO_LED));
 
-    // if(PINO_LED < 8) *pGPIOC_CRL = reg; 
-    // else *pGPIOC_CRH = reg;
-    
-    *pGPIOC_CRH = reg;
+    if(PINO_LED < 8) *pGPIOC_CRL = reg; 
+    else *pGPIOC_CRH = reg;
     // *pGPIOC_CRH = 0x1 << 20;
 
     while(1)
