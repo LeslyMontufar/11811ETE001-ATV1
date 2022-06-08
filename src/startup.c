@@ -90,7 +90,7 @@ extern uint32_t _la_data;   /* Endereco de carga na RAM da secao .data */
 extern uint32_t _sbss;      /* Inicio da secao .bss */
 extern uint32_t _ebss;      /* Fim da secao .bss */
 
-extern uint32_t _etext;     /* Fim da secao .text */
+// extern uint32_t _etext;     /* Fim da secao .text */
 
 
 uint32_t vectors[] __attribute__((section(".isr_vectors"))) =
