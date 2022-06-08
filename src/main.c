@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #define LED_DELAY 5000
+#define PINO_LED 13
 
 /* AHB1 Base Addresses ******************************************************/
 
@@ -31,11 +32,6 @@
 
 /* Port configuration register */
 
-#define GPIO_MODE_INPUT               (0) /* Input */
-#define GPIO_MODE_OUTPUT_10MHZ        (1) /* Output 10MHz */
-#define GPIO_MODE_OUTPUT_2MHZ         (2) /* Output 2MHz */
-#define GPIO_MODE_OUTPUT_50MHZ        (3) /* Output 50MHz */
-
 #define GPIO_CNF_I_ANALOG_MODE        (0) /* Input: Analog mode */
 #define GPIO_CNF_I_FLOATING_INPUT     (1) /* Input: Floating input (reset state) */
 #define GPIO_CNF_I_PULL_UP_DOWN       (2) /* Input: Input with pull-up / pull-down */
@@ -46,20 +42,18 @@
 #define GPIO_CNF_O_AFO_PUSH_PULL      (2) /* Output: Alternate function output Push-pull */
 #define GPIO_CNF_O_AFO_OPEN_DRAIN     (3) /* Output: Alternate function output Open-drain */
 
+#define GPIO_MODE_INPUT               (0) /* Input */
+#define GPIO_MODE_OUTPUT_10MHZ        (1) /* Output 10MHz */
+#define GPIO_MODE_OUTPUT_2MHZ         (2) /* Output 2MHz */
+#define GPIO_MODE_OUTPUT_50MHZ        (3) /* Output 50MHz */
 
-#define GPIO_MODE_SHIFT(n)            (n < 8) ? (3 << n) : (3 << (n - 8))
+/* Máscaras para setar os registradores da memória */
+
+#define GPIO_MODE_SHIFT(n)            (n < 8) ? (3 << n*4) : (3 << (n - 8)*4)
 #define GPIO_MODE_MASK(n)             (3 << GPIO_MODE_SHIFT(n))
 
-// #define GPIO_MODER_SHIFT(n)        (n << 1)
-// #define GPIO_MODER_MASK(n)         (3 << GPIO_MODER_SHIFT(n))
-
-// #define GPIO_MODER_INPUT           (0) /* Input */
-// #define GPIO_MODER_OUTPUT          (1) /* General purpose output mode */
-// #define GPIO_MODER_ALT             (2) /* Alternate mode */
-// #define GPIO_MODER_ANALOG          (3) /* Analog mode */
-
-// #define GPIO_MODER_SHIFT(n)        (n << 1)
-// #define GPIO_MODER_MASK(n)         (3 << GPIO_MODER_SHIFT(n))
+#define GPIO_CNF_SHIFT(n)            (n < 8) ? (3 << n*4 + 2) : (3 << (n - 8)*4 + 2)
+#define GPIO_CNF_MASK(n)             (3 << GPIO_CNF_SHIFT(n))
 
 
 // /* GPIO port bit set/reset register */
@@ -70,7 +64,7 @@
 
 int main(int argc, char *argv[])
 {
-    uint32_t reg;
+    uint32_t reg; //registrador var auxiliar
     uint32_t i;
 
     /* Ponteiros para registradores */
@@ -80,25 +74,18 @@ int main(int argc, char *argv[])
 
 
     /* Habilita clock GPIOC */
-    reg  = *pRCC_AHB1ENR;
-    reg |= RCC_AHB1ENR_GPIOCEN;
-    *pRCC_AHB1ENR = reg;
+    reg  = *pRCC_APB2ENR;
+    reg |= RCC_APB2ENR_IOPCEN;
+    *pRCC_APB2ENR = reg;
     
-    /* Configura PC13 como saida pull-up off e pull-down off */
-    reg = *pGPIOC_MODER;
-    reg &= ~GPIO_MODER_MASK(13);
-    reg |= (GPIO_MODER_OUTPUT << GPIO_MODER_SHIFT(13));
-    *pGPIOC_MODER = reg;  
+    /* Configura PC13 como saida General purpose output push-pull */
+    reg = (PINO_LED >= 8)? *pGPIO_CRH : *pGPIO_CRL;
+    reg &= ~GPIO_MODE_MASK(PINO_LED);
+    reg |= (GPIO_MODE_OUTPUT_50MHZ << GPIO_MODE_SHIFT(PINO_LED));
+    if(PINO_LED >= 8) *pGPIO_CRH = reg; 
+    else *pGPIO_CRL = reg; 
 
-    reg = *pGPIOC_OTYPER;
-    reg &= ~GPIO_OT_MASK(13);
-    reg |= (GPIO_OTYPER_PP << GPIO_OT_SHIFT(13));
-    *pGPIOC_OTYPER = reg;
-
-    reg = *pGPIOC_PUPDR;
-    reg &= ~GPIO_PUPDR_MASK(13);
-    reg |= (GPIO_PUPDR_NONE << GPIO_PUPDR_SHIFT(13));
-    *pGPIOC_PUPDR = reg;
+    // até aqui entendido
 
     while(1)
     {
