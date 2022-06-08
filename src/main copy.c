@@ -24,7 +24,7 @@
 #define STM32_GPIOC_BSRR         (STM32_GPIOC_BASE+STM32_GPIO_BSRR_OFFSET)
 
 /* AHB1 Peripheral Clock enable register */
-#define RCC_AHB1ENR_GPIOCEN (1 << 2)    /* Bit 2: IO port C clock enable */
+#define RCC_AHB1ENR_GPIOCEN        (1 << 2)    /* Bit 2: IO port C clock enable */
 
 /* GPIO port mode register */
 #define GPIO_MODER_INPUT           (0) /* Input */

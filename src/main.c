@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdint.h>
-#define LED_DELAY 5000
+#define LED_DELAY 50000
 #define PINO_LED 13
 
 /* AHB1 Base Addresses ******************************************************/
@@ -53,10 +53,10 @@
 
 /* Deslocamento do registrador e Máscaras para setar os registradores da memória */
 
-#define GPIO_MODE_SHIFT(n)            (n < 8) ? (n << 2) : ((n - 8) << 2)
+#define GPIO_MODE_SHIFT(n)            ((n < 8) ? (n << 2) : ((n - 8) << 2))
 #define GPIO_MODE_MASK(n)             (3 << GPIO_MODE_SHIFT(n))
 
-#define GPIO_CNF_SHIFT(n)             (n < 8) ? ((n << 2) + 2) : ((n - 8) << 2 + 2)
+#define GPIO_CNF_SHIFT(n)             ((n < 8) ? ((n << 2) + 2) : (((n - 8) << 2) + 2))
 #define GPIO_CNF_MASK(n)              (3 << GPIO_CNF_SHIFT(n))
 
 /* GPIO port bit set/reset register */
@@ -80,22 +80,26 @@ int main(int argc, char *argv[])
     *pRCC_APB2ENR = reg;
     
     /* Configura PC13 como saida General purpose output push-pull */
-    reg = (PINO_LED >= 8)? *pGPIOC_CRH : *pGPIOC_CRL;
+    // reg = (PINO_LED < 8)? *pGPIOC_CRL : *pGPIOC_CRH;
 
+    reg = *pGPIOC_CRH;
     reg &= ~GPIO_CNF_MASK(PINO_LED);
     reg |= (GPIO_CNF_O_GPO_PUSH_PULL << GPIO_CNF_SHIFT(PINO_LED));
 
     reg &= ~GPIO_MODE_MASK(PINO_LED);
     reg |= (GPIO_MODE_OUTPUT_10MHZ << GPIO_MODE_SHIFT(PINO_LED));
 
-    if(PINO_LED >= 8) *pGPIOC_CRH = reg; 
-    else *pGPIOC_CRL = reg; 
+    // if(PINO_LED < 8) *pGPIOC_CRL = reg; 
+    // else *pGPIOC_CRH = reg;
+    
+    *pGPIOC_CRH = reg;
+    // *pGPIOC_CRH = 0x1 << 20;
 
     while(1)
     {
-        *pGPIOC_BSRR = GPIO_BSRR_SET(13);
+        *pGPIOC_BSRR = GPIO_BSRR_SET(PINO_LED);
         for(i = 0; i < LED_DELAY; i++);
-        *pGPIOC_BSRR = GPIO_BSRR_RST(13);
+        *pGPIOC_BSRR = GPIO_BSRR_RST(PINO_LED);
         for(i = 0; i < LED_DELAY; i++);
     }
 
