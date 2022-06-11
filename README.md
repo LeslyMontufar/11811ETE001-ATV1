@@ -5,16 +5,20 @@ Autora: Lesly Montúfar
 ## Índice 
 
 * [Descrição](#descrição)
-* [Preparo do ambiente de desenvolvimento](#preparo-do-ambiente-de-desenvolvimento)
-* [Makefile e startup.c](#gravando-o-código-no-stm32f103)
-* [main.c e linker script](#gravando-o-código-no-stm32f103)
+* [Preparo do ambiente bare metal de desenvolvimento](#preparo-do-ambiente-bare-metal-de-desenvolvimento)
+* [Makefile e startup.c](#makefile-e-startupc) 
+* [main.c e linker script](#mainc-e-linker-script) 
 
 ## Descrição
 
-Siga os roteiros anexos para instalação e configuração do seu ambiente bare metal de desenvolvimento. Crie os arquivos básicos do seu primeiro programa (main.c, startup.c, linker script, Makefile). Teste todo o ambiente.
+Foram seguidos os seguintes passos:
+
+1. Siga os [roteiros anexos](https://github.com/LeslyMontufar/11811ETE001-ATV1/blob/main/img) para instalação e configuração do seu ambiente bare metal de desenvolvimento. 
+2. Crie os arquivos básicos do seu primeiro programa (main.c, startup.c, linker script, Makefile). 
+3. Teste todo o ambiente.
 
 
-## Preparo do ambiente de desenvolvimento
+## Preparo do ambiente bare metal de desenvolvimento
 
 ### Instalando a toolchain GCC ARM
 Como visto abaixo, a toolchain foi instalada corretamente.
@@ -22,7 +26,7 @@ Como visto abaixo, a toolchain foi instalada corretamente.
 ![1](https://github.com/LeslyMontufar/11811ETE001-ATV1/blob/main/img/1.jpeg)
 
 ### Instalando as ferramentas de gravação e depuração de código
-OpenOCD foi instalado corretamente, como visto nas imagens abaixo, e pode ser utilizado com o STLink.
+OpenOCD foi instalado corretamente, como visto na imagem abaixo, e pode ser utilizado com o STLink.
 
 ![2](https://github.com/LeslyMontufar/11811ETE001-ATV1/blob/main/img/2.jpeg)
 
