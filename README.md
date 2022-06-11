@@ -1,7 +1,20 @@
-# 11811ETE001-ATV1
-ATV1 de Sistemas Embarcados 1
+# Configuração do ambiente de desenvolvimento bare metal
 
-## Preparando o ambiente de desenvolvimento
+Autora: Lesly Montúfar
+
+## Índice 
+
+* [Descrição](#descrição)
+* [Preparo do ambiente de desenvolvimento](#preparo-do-ambiente-de-desenvolvimento)
+* [Makefile e startup.c](#gravando-o-código-no-stm32f103)
+* [main.c e linker script](#gravando-o-código-no-stm32f103)
+
+## Descrição
+
+Siga os roteiros anexos para instalação e configuração do seu ambiente bare metal de desenvolvimento. Crie os arquivos básicos do seu primeiro programa (main.c, startup.c, linker script, Makefile). Teste todo o ambiente.
+
+
+## Preparo do ambiente de desenvolvimento
 
 ### Instalando a toolchain GCC ARM
 Como visto abaixo, a toolchain foi instalada corretamente.
