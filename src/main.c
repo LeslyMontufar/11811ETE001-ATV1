@@ -5,34 +5,34 @@
 
 /* AHB1 Base Addresses ******************************************************/
 
-#define STM32_RCC_BASE      0x40021000     /* 0x40021000 - 0x400213ff: Reset and Clock control RCC */
+#define STM32_RCC_BASE                0x40021000      /* 0x40021000 - 0x400213ff: Reset and Clock control RCC */
 
 /* AHB2 Base Addresses ******************************************************/
 
-#define STM32_GPIOC_BASE    0x40011000     /* 0x40011000 - 0x400113ff: GPIO Port C */
+#define STM32_GPIOC_BASE              0x40011000      /* 0x40011000 - 0x400113ff: GPIO Port C */
 
 /* Register Offsets *********************************************************/
 
-#define STM32_RCC_APB2ENR_OFFSET    0x0018  /* APB2 peripheral clock enable register */
+#define STM32_RCC_APB2ENR_OFFSET      0x0018          /* APB2 peripheral clock enable register */
 
-#define STM32_GPIO_CRL_OFFSET       0x0000  /* Port configuration register low */
-#define STM32_GPIO_CRH_OFFSET       0x0004  /* Port configuration register high */
+#define STM32_GPIO_CRL_OFFSET         0x0000          /* Port configuration register low */
+#define STM32_GPIO_CRH_OFFSET         0x0004          /* Port configuration register high */
 
-#define STM32_GPIO_BSRR_OFFSET      0x0010  /* Port bit set/reset register */
+#define STM32_GPIO_BSRR_OFFSET        0x0010          /* Port bit set/reset register */
 
 
 /* Register Addresses *******************************************************/
 
-#define STM32_RCC_APB2ENR               (STM32_RCC_BASE+STM32_RCC_APB2ENR_OFFSET)
+#define STM32_RCC_APB2ENR             (STM32_RCC_BASE+STM32_RCC_APB2ENR_OFFSET)
 
-#define STM32_GPIOC_CRL                 (STM32_GPIOC_BASE+STM32_GPIO_CRL_OFFSET)
-#define STM32_GPIOC_CRH                 (STM32_GPIOC_BASE+STM32_GPIO_CRH_OFFSET)
+#define STM32_GPIOC_CRL               (STM32_GPIOC_BASE+STM32_GPIO_CRL_OFFSET)
+#define STM32_GPIOC_CRH               (STM32_GPIOC_BASE+STM32_GPIO_CRH_OFFSET)
 
-#define STM32_GPIOC_BSRR                (STM32_GPIOC_BASE+STM32_GPIO_BSRR_OFFSET)
+#define STM32_GPIOC_BSRR              (STM32_GPIOC_BASE+STM32_GPIO_BSRR_OFFSET)
 
 /* APB2 Peripheral Clock enable register (RCC_APB2ENR) */
 
-#define RCC_APB2ENR_IOPCEN         (1 << 4)    /* Bit 4 IOPCEN: IO port C clock enable */
+#define RCC_APB2ENR_IOPCEN            (1 << 4)    /* Bit 4 IOPCEN: IO port C clock enable */
 
 /* Port configuration register */
 
